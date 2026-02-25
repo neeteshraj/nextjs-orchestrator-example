@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script";
+import { MVTScripts } from "@mvtlab/nextjs-orchestrator";
 import { Nav } from "@/components/Nav";
 import "./globals.css";
 
@@ -29,24 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
-        {/* Anti-flickering: hides body until the engine applies variants or the timeout fires */}
-        <Script
-          id="anti-flicker"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `var timeout=3000;!(function(h,i,d,e){var t,n=h.createElement("style");(n.id=e),(n.innerHTML="body{opacity:0}"),h.head.appendChild(n),(t=d),(i.rmfk=function(){var t=h.getElementById(e);t&&t.parentNode.removeChild(t)}),setTimeout(i.rmfk,t)})(document,window,timeout,"abhide");`,
-          }}
-        />
-        {/* MVTLab orchestrator engine */}
-        <Script
-          src="https://staging-svc.mvtlab.io/scripts/engine.js"
-          data-project-key="S6kCanTUhDPa4DAoeEVKvg"
-          data-mvt="engine"
-          data-mvt-engine="true"
-          data-flicker-class="abtest-hidden"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
+        <MVTScripts orchestratorKey="vrJORte58sKGTP9Og_GPCQ" />
         <Nav />
         <div className="flex-1">{children}</div>
       </body>
